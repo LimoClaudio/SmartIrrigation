@@ -148,6 +148,33 @@
         #TurnPumpOFF {
             background-color: red;
         }
+
+        table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    td {
+      text-align: center;
+    }
+
+    /* Styling for "No data available" row */
+    .no-data {
+      text-align: center;
+      font-style: italic;
+      color: #888;
+    }
   </style>
 </head>
 <body>
@@ -163,12 +190,12 @@
   <!-- Sidebar -->
   <div id="mySidebar" class="sidebar">
     <a href="javascript:void(0)" class="close-btn" onclick="closeSidebar()">&times;</a>
-    <a href="#" class="menu-link menu-item-first"><i class="fas fa-home"></i><span class="menu-name"> Readings</span></a>
-    <a href="#" class="menu-link"><i class="fas fa-history"> </i><span class="menu-name"> History</span></a>
+    <a href="#" onclick="displayHome()" class="menu-link menu-item-first"><i class="fas fa-home"></i><span class="menu-name"> Readings</span></a>
+    <a href="#" onclick="displayHistory()" class="menu-link"><i class="fas fa-history"> </i><span class="menu-name"> History</span></a>
     <a href="#" class="menu-link"> <i class="fas fa-sign-out-alt"></i><span class="menu-name"> Logout</span></a>
   </div>
 
-  <div class="container">
+  <div class="container" id="homecontainer">
         
 
         <!-- Soil Moisture and Irrigation Status -->
@@ -188,8 +215,28 @@
         
     
     <!-- Buttons for TURNING PUMP -->
-    <button class="button" id="TurnPumpON">Start Irrigation</button>
+      <button class="button" id="TurnPumpON">Start Irrigation</button>
         <button class="button" id="TurnPumpOFF">Stop Irrigation</button>
+    </div>
+
+    <div class="container-table" id="tablecontainer" style="display: none;">
+      <table>
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>User</th>
+            <th>Sensor</th>
+            <th>Start</th>
+            <th>End</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Row displaying "No data available" -->
+          <tr class="no-data">
+            <td colspan="5">No data available</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
   <script>
@@ -200,6 +247,18 @@
 
     // Function to close the sidebar
     function closeSidebar() {
+      document.getElementById("mySidebar").style.width = "0";
+    }
+
+    function displayHistory(){
+      document.getElementById("homecontainer").style.display = "none";
+      document.getElementById("tablecontainer").style.display = "block";
+      document.getElementById("mySidebar").style.width = "0";
+
+    }
+    function displayHome(){
+      document.getElementById("homecontainer").style.display = "block";
+      document.getElementById("tablecontainer").style.display = "none";
       document.getElementById("mySidebar").style.width = "0";
     }
   </script>
